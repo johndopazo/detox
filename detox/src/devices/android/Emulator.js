@@ -34,28 +34,30 @@ class Emulator {
     const childProcess = promise.childProcess;
     childProcess.unref();
 
-    tail.on("line", function(data) {
-      if (data.includes('Adb connected, start proxing data')) {
-        detach();
+    tail.on("line", function(line) {
+      if (line.includes('Adb connected, start proxing data')) {
+        detach(false);
       }
-      if (data.includes(`There's another emulator instance running with the current AVD`)) {
-        detach();
-      }
-    });
-
-    tail.on("error", function(error) {
-      detach();
-      log.verbose('Emulator stderr: ', error);
     });
 
     promise.catch(function(err) {
-      log.error('Emulator ERROR: ', err);
+      if (log.level === 'verbose') {
+          log.error('Error', '%j', err);
+      } else {
+          log.error('Error', '%s', err.message);
+      }
+      detach(true);
     });
 
-    function detach() {
+    function detach(shouldLogOutput) {
       tail.unwatch();
       fs.closeSync(stdout);
       fs.closeSync(stderr);
+
+      if (shouldLogOutput) {
+          log.error('stdout', '%s', fs.readFileSync(tempLog, 'utf8'));
+      }
+
       fs.unlink(tempLog, () => {});
       promise._cpResolve();
     }
