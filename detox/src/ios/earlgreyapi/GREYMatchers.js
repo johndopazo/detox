@@ -4,92 +4,91 @@
 	For more information see generation/README.md.
 */
 
-
 function sanitize_uiAccessibilityTraits(value) {
-	let traits = 0;
-	for (let i = 0; i < value.length; i++) {
-		switch (value[i]) {
-			case "button":
-				traits |= 1;
-				break;
-			case "link":
-				traits |= 2;
-				break;
-			case "header":
-				traits |= 4;
-				break;
-			case "search":
-				traits |= 8;
-				break;
-			case "image":
-				traits |= 16;
-				break;
-			case "selected":
-				traits |= 32;
-				break;
-			case "plays":
-				traits |= 64;
-				break;
-			case "key":
-				traits |= 128;
-				break;
-			case "text":
-				traits |= 256;
-				break;
-			case "summary":
-				traits |= 512;
-				break;
-			case "disabled":
-				traits |= 1024;
-				break;
-			case "frequentUpdates":
-				traits |= 2048;
-				break;
-			case "startsMedia":
-				traits |= 4096;
-				break;
-			case "adjustable":
-				traits |= 8192;
-				break;
-			case "allowsDirectInteraction":
-				traits |= 16384;
-				break;
-			case "pageTurn":
-				traits |= 32768;
-				break;
-			default:
-				throw new Error(
-					`Unknown trait '${
-						value[i]
-					}', see list in https://facebook.github.io/react-native/docs/accessibility.html#accessibilitytraits-ios`
-				);
-		}
-	}
+  let traits = 0;
+  for (let i = 0; i < value.length; i++) {
+    switch (value[i]) {
+      case "button":
+        traits |= 1;
+        break;
+      case "link":
+        traits |= 2;
+        break;
+      case "header":
+        traits |= 4;
+        break;
+      case "search":
+        traits |= 8;
+        break;
+      case "image":
+        traits |= 16;
+        break;
+      case "selected":
+        traits |= 32;
+        break;
+      case "plays":
+        traits |= 64;
+        break;
+      case "key":
+        traits |= 128;
+        break;
+      case "text":
+        traits |= 256;
+        break;
+      case "summary":
+        traits |= 512;
+        break;
+      case "disabled":
+        traits |= 1024;
+        break;
+      case "frequentUpdates":
+        traits |= 2048;
+        break;
+      case "startsMedia":
+        traits |= 4096;
+        break;
+      case "adjustable":
+        traits |= 8192;
+        break;
+      case "allowsDirectInteraction":
+        traits |= 16384;
+        break;
+      case "pageTurn":
+        traits |= 32768;
+        break;
+      default:
+        throw new Error(
+          `Unknown trait '${
+            value[i]
+          }', see list in https://facebook.github.io/react-native/docs/accessibility.html#accessibilitytraits-ios`
+        );
+    }
+  }
 
-	return traits;
-} 
+  return traits;
+}
 function sanitize_greyContentEdge(action) {
-	switch (action) {
-		case "left":
-			return 0;
-		case "right":
-			return 1;
-		case "top":
-			return 2;
-		case "bottom":
-			return 3;
+  switch (action) {
+    case "left":
+      return 0;
+    case "right":
+      return 1;
+    case "top":
+      return 2;
+    case "bottom":
+      return 3;
 
-		default:
-			throw new Error(
-				`GREYAction.GREYContentEdge must be a 'left'/'right'/'top'/'bottom', got ${action}`
-			);
-	}
-} 
+    default:
+      throw new Error(
+        `GREYAction.GREYContentEdge must be a 'left'/'right'/'top'/'bottom', got ${action}`
+      );
+  }
+}
 class GREYMatchers {
   /*Matcher for application's key window.
 
 @return A matcher for the application's key window.
-*/static matcherForKeyWindow() {
+*/ static matcherForKeyWindow() {
     return {
       target: {
         type: "Class",
@@ -105,18 +104,26 @@ class GREYMatchers {
 @param label The accessibility label to be matched.
 
 @return A matcher for the accessibility label of an accessible element.
-*/static matcherForAccessibilityLabel(label) {
-    if (typeof label !== "string") throw new Error("label should be a string, but got " + (label + (" (" + (typeof label + ")"))));
+*/ static matcherForAccessibilityLabel(
+    label
+  ) {
+    if (typeof label !== "string")
+      throw new Error(
+        "label should be a string, but got " +
+          (label + (" (" + (typeof label + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForAccessibilityLabel:",
-      args: [{
-        type: "NSString",
-        value: label
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: label
+        }
+      ]
     };
   }
 
@@ -125,18 +132,26 @@ class GREYMatchers {
 @param accessibilityID The accessibility ID to be matched.
 
 @return A matcher for the accessibility ID of an accessible element.
-*/static matcherForAccessibilityID(accessibilityID) {
-    if (typeof accessibilityID !== "string") throw new Error("accessibilityID should be a string, but got " + (accessibilityID + (" (" + (typeof accessibilityID + ")"))));
+*/ static matcherForAccessibilityID(
+    accessibilityID
+  ) {
+    if (typeof accessibilityID !== "string")
+      throw new Error(
+        "accessibilityID should be a string, but got " +
+          (accessibilityID + (" (" + (typeof accessibilityID + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForAccessibilityID:",
-      args: [{
-        type: "NSString",
-        value: accessibilityID
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: accessibilityID
+        }
+      ]
     };
   }
 
@@ -145,18 +160,26 @@ class GREYMatchers {
 @param value The accessibility value to be matched.
 
 @return A matcher for the accessibility value of an accessible element.
-*/static matcherForAccessibilityValue(value) {
-    if (typeof value !== "string") throw new Error("value should be a string, but got " + (value + (" (" + (typeof value + ")"))));
+*/ static matcherForAccessibilityValue(
+    value
+  ) {
+    if (typeof value !== "string")
+      throw new Error(
+        "value should be a string, but got " +
+          (value + (" (" + (typeof value + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForAccessibilityValue:",
-      args: [{
-        type: "NSString",
-        value: value
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: value
+        }
+      ]
     };
   }
 
@@ -166,9 +189,11 @@ class GREYMatchers {
 
 @return A matcher for the accessibility traits of an accessible element.
 
-*/static matcherForAccessibilityTraits(traits) {
-    if (typeof traits !== 'object' || !traits instanceof Array) {
-      throw new Error('traits must be an array, got ' + typeof traits);
+*/ static matcherForAccessibilityTraits(
+    traits
+  ) {
+    if (typeof traits !== "object" || !traits instanceof Array) {
+      throw new Error("traits must be an array, got " + typeof traits);
     }
 
     return {
@@ -177,10 +202,12 @@ class GREYMatchers {
         value: "GREYMatchers"
       },
       method: "matcherForAccessibilityTraits:",
-      args: [{
-        type: "NSInteger",
-        value: sanitize_uiAccessibilityTraits(traits)
-      }]
+      args: [
+        {
+          type: "NSInteger",
+          value: sanitize_uiAccessibilityTraits(traits)
+        }
+      ]
     };
   }
 
@@ -189,25 +216,33 @@ class GREYMatchers {
 @param hint The accessibility hint to be matched.
 
 @return A matcher for the accessibility hint of an accessible element.
-*/static matcherForAccessibilityHint(hint) {
-    if (typeof hint !== "string") throw new Error("hint should be a string, but got " + (hint + (" (" + (typeof hint + ")"))));
+*/ static matcherForAccessibilityHint(
+    hint
+  ) {
+    if (typeof hint !== "string")
+      throw new Error(
+        "hint should be a string, but got " +
+          (hint + (" (" + (typeof hint + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForAccessibilityHint:",
-      args: [{
-        type: "NSString",
-        value: hint
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: hint
+        }
+      ]
     };
   }
 
   /*Matcher for UI element with accessiblity focus.
 
 @return A matcher for the accessibility focus of an accessible element.
-*/static matcherForAccessibilityElementIsFocused() {
+*/ static matcherForAccessibilityElementIsFocused() {
     return {
       target: {
         type: "Class",
@@ -224,25 +259,33 @@ provided @c inputText.
 @param text The text to be matched in the UI elements.
 
 @return A matcher to check for any UI elements with a text field containing the given text.
-*/static matcherForText(text) {
-    if (typeof text !== "string") throw new Error("text should be a string, but got " + (text + (" (" + (typeof text + ")"))));
+*/ static matcherForText(
+    text
+  ) {
+    if (typeof text !== "string")
+      throw new Error(
+        "text should be a string, but got " +
+          (text + (" (" + (typeof text + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForText:",
-      args: [{
-        type: "NSString",
-        value: text
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: text
+        }
+      ]
     };
   }
 
   /*Matcher for element that is the first responder.
 
 @return A matcher that verifies if a UI element is the first responder.
-*/static matcherForFirstResponder() {
+*/ static matcherForFirstResponder() {
     return {
       target: {
         type: "Class",
@@ -256,7 +299,7 @@ provided @c inputText.
   /*Matcher to check if system alert view is shown.
 
 @return A matcher to check if a system alert view is being shown.
-*/static matcherForSystemAlertViewShown() {
+*/ static matcherForSystemAlertViewShown() {
     return {
       target: {
         type: "Class",
@@ -275,18 +318,26 @@ Allowed values for @c percent are [0,1] inclusive.
 
 @return A matcher that checks if a UI element has a visible area at least equal
 to a minimum value.
-*/static matcherForMinimumVisiblePercent(percent) {
-    if (typeof percent !== "number") throw new Error("percent should be a number, but got " + (percent + (" (" + (typeof percent + ")"))));
+*/ static matcherForMinimumVisiblePercent(
+    percent
+  ) {
+    if (typeof percent !== "number")
+      throw new Error(
+        "percent should be a number, but got " +
+          (percent + (" (" + (typeof percent + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForMinimumVisiblePercent:",
-      args: [{
-        type: "CGFloat",
-        value: percent
-      }]
+      args: [
+        {
+          type: "CGFloat",
+          value: percent
+        }
+      ]
     };
   }
 
@@ -296,7 +347,7 @@ sufficiently visible.
 
 @return A matcher intialized with a visibility percentage that confirms an element is
 sufficiently visible.
-*/static matcherForSufficientlyVisible() {
+*/ static matcherForSufficientlyVisible() {
     return {
       target: {
         type: "Class",
@@ -310,7 +361,7 @@ sufficiently visible.
   /*Matcher for UI element that is not visible to the user at all i.e. it has a zero visible area.
 
 @return A matcher for verifying if an element is not visible.
-*/static matcherForNotVisible() {
+*/ static matcherForNotVisible() {
     return {
       target: {
         type: "Class",
@@ -328,7 +379,7 @@ satisfy at least the following criteria:
 is completely visible.
 
 @return A matcher that checks if a UI element is interactable.
-*/static matcherForInteractable() {
+*/ static matcherForInteractable() {
     return {
       target: {
         type: "Class",
@@ -342,7 +393,7 @@ is completely visible.
   /*Matcher to check if a UI element is accessible.
 
 @return A matcher that checks if a UI element is accessible.
-*/static matcherForAccessibilityElement() {
+*/ static matcherForAccessibilityElement() {
     return {
       target: {
         type: "Class",
@@ -362,9 +413,20 @@ unimplemented matcher is required, please implement it similar to @c grey_closeT
 @param comparisonMatcher The matcher with the value to check the progress against.
 
 @return A matcher for checking a UIProgessView's value.
-*/static matcherForProgress(comparisonMatcher) {
-    if (typeof comparisonMatcher !== "object" || comparisonMatcher.type !== "Invocation" || typeof comparisonMatcher.value !== "object" || typeof comparisonMatcher.value.target !== "object" || comparisonMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('comparisonMatcher should be a GREYMatcher, but got ' + JSON.stringify(comparisonMatcher));
+*/ static matcherForProgress(
+    comparisonMatcher
+  ) {
+    if (
+      typeof comparisonMatcher !== "object" ||
+      comparisonMatcher.type !== "Invocation" ||
+      typeof comparisonMatcher.value !== "object" ||
+      typeof comparisonMatcher.value.target !== "object" ||
+      comparisonMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "comparisonMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(comparisonMatcher)
+      );
     }
 
     return {
@@ -383,9 +445,20 @@ The given matcher is used to match decendants.
 @param ancestorMatcher The ancestor UI element whose descendants are to be matched.
 
 @return A matcher to check if a UI element is the descendant of another.
-*/static matcherForAncestor(ancestorMatcher) {
-    if (typeof ancestorMatcher !== "object" || ancestorMatcher.type !== "Invocation" || typeof ancestorMatcher.value !== "object" || typeof ancestorMatcher.value.target !== "object" || ancestorMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('ancestorMatcher should be a GREYMatcher, but got ' + JSON.stringify(ancestorMatcher));
+*/ static matcherForAncestor(
+    ancestorMatcher
+  ) {
+    if (
+      typeof ancestorMatcher !== "object" ||
+      ancestorMatcher.type !== "Invocation" ||
+      typeof ancestorMatcher.value !== "object" ||
+      typeof ancestorMatcher.value.target !== "object" ||
+      ancestorMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "ancestorMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(ancestorMatcher)
+      );
     }
 
     return {
@@ -404,9 +477,20 @@ The given matcher is used to match decendants.
 of the UI element being checked.
 
 @return A matcher to check if a the specified element is in a descendant of another UI element.
-*/static matcherForDescendant(descendantMatcher) {
-    if (typeof descendantMatcher !== "object" || descendantMatcher.type !== "Invocation" || typeof descendantMatcher.value !== "object" || typeof descendantMatcher.value.target !== "object" || descendantMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('descendantMatcher should be a GREYMatcher, but got ' + JSON.stringify(descendantMatcher));
+*/ static matcherForDescendant(
+    descendantMatcher
+  ) {
+    if (
+      typeof descendantMatcher !== "object" ||
+      descendantMatcher.type !== "Invocation" ||
+      typeof descendantMatcher.value !== "object" ||
+      typeof descendantMatcher.value.target !== "object" ||
+      descendantMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "descendantMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(descendantMatcher)
+      );
     }
 
     return {
@@ -424,18 +508,26 @@ of the UI element being checked.
 @param title The title to be checked on the UIButtons being matched.
 
 @return A matcher to confirm UIButton titles.
-*/static matcherForButtonTitle(title) {
-    if (typeof title !== "string") throw new Error("title should be a string, but got " + (title + (" (" + (typeof title + ")"))));
+*/ static matcherForButtonTitle(
+    title
+  ) {
+    if (typeof title !== "string")
+      throw new Error(
+        "title should be a string, but got " +
+          (title + (" (" + (typeof title + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForButtonTitle:",
-      args: [{
-        type: "NSString",
-        value: title
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: title
+        }
+      ]
     };
   }
 
@@ -445,20 +537,36 @@ of the UI element being checked.
 matched.
 
 @return A matcher to confirm UIScrollView content offset.
-*/static matcherForScrollViewContentOffset(offset) {
-    if (typeof offset !== "object") throw new Error("offset should be a object, but got " + (offset + (" (" + (typeof offset + ")"))));
-    if (typeof offset.x !== "number") throw new Error("offset.x should be a number, but got " + (offset.x + (" (" + (typeof offset.x + ")"))));
-    if (typeof offset.y !== "number") throw new Error("offset.y should be a number, but got " + (offset.y + (" (" + (typeof offset.y + ")"))));
+*/ static matcherForScrollViewContentOffset(
+    offset
+  ) {
+    if (typeof offset !== "object")
+      throw new Error(
+        "offset should be a object, but got " +
+          (offset + (" (" + (typeof offset + ")")))
+      );
+    if (typeof offset.x !== "number")
+      throw new Error(
+        "offset.x should be a number, but got " +
+          (offset.x + (" (" + (typeof offset.x + ")")))
+      );
+    if (typeof offset.y !== "number")
+      throw new Error(
+        "offset.y should be a number, but got " +
+          (offset.y + (" (" + (typeof offset.y + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForScrollViewContentOffset:",
-      args: [{
-        type: "CGPoint",
-        value: offset
-      }]
+      args: [
+        {
+          type: "CGPoint",
+          value: offset
+        }
+      ]
     };
   }
 
@@ -474,9 +582,20 @@ floating point value. If you are using @c grey_closeTo, use delta diff as
 is required, please implement it similar to @c grey_closeTo.
 
 @return A matcher for checking a UISlider's value.
-*/static matcherForSliderValueMatcher(valueMatcher) {
-    if (typeof valueMatcher !== "object" || valueMatcher.type !== "Invocation" || typeof valueMatcher.value !== "object" || typeof valueMatcher.value.target !== "object" || valueMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('valueMatcher should be a GREYMatcher, but got ' + JSON.stringify(valueMatcher));
+*/ static matcherForSliderValueMatcher(
+    valueMatcher
+  ) {
+    if (
+      typeof valueMatcher !== "object" ||
+      valueMatcher.type !== "Invocation" ||
+      typeof valueMatcher.value !== "object" ||
+      typeof valueMatcher.value.target !== "object" ||
+      valueMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "valueMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(valueMatcher)
+      );
     }
 
     return {
@@ -495,29 +614,43 @@ is required, please implement it similar to @c grey_closeTo.
 @param value  The value that should be set in the column of the UIPickerView.
 
 @return A matcher to check the value in a particular column of a UIPickerView.
-*/static matcherForPickerColumnSetToValue(column, value) {
-    if (typeof column !== "number") throw new Error("column should be a number, but got " + (column + (" (" + (typeof column + ")"))));
-    if (typeof value !== "string") throw new Error("value should be a string, but got " + (value + (" (" + (typeof value + ")"))));
+*/ static matcherForPickerColumnSetToValue(
+    column,
+    value
+  ) {
+    if (typeof column !== "number")
+      throw new Error(
+        "column should be a number, but got " +
+          (column + (" (" + (typeof column + ")")))
+      );
+    if (typeof value !== "string")
+      throw new Error(
+        "value should be a string, but got " +
+          (value + (" (" + (typeof value + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForPickerColumn:setToValue:",
-      args: [{
-        type: "NSInteger",
-        value: column
-      }, {
-        type: "NSString",
-        value: value
-      }]
+      args: [
+        {
+          type: "NSInteger",
+          value: column
+        },
+        {
+          type: "NSString",
+          value: value
+        }
+      ]
     };
   }
 
   /*Matcher that verifies whether an element, that is a UIControl, is enabled.
 
 @return A matcher for checking whether a UI element is an enabled UIControl.
-*/static matcherForEnabledElement() {
+*/ static matcherForEnabledElement() {
     return {
       target: {
         type: "Class",
@@ -531,7 +664,7 @@ is required, please implement it similar to @c grey_closeTo.
   /*Matcher that verifies whether an element, that is a UIControl, is selected.
 
 @return A matcher for checking whether a UI element is a selected UIControl.
-*/static matcherForSelectedElement() {
+*/ static matcherForSelectedElement() {
     return {
       target: {
         type: "Class",
@@ -545,7 +678,7 @@ is required, please implement it similar to @c grey_closeTo.
   /*Matcher that verifies whether a view has its userInteractionEnabled property set to @c YES.
 
 @return A matcher for checking whether a view' userInteractionEnabled property is set to @c YES.
-*/static matcherForUserInteractionEnabled() {
+*/ static matcherForUserInteractionEnabled() {
     return {
       target: {
         type: "Class",
@@ -559,7 +692,7 @@ is required, please implement it similar to @c grey_closeTo.
   /*Matcher primarily for asserting that the element is @c nil or not found.
 
 @return A matcher to check if a specified element is @c nil or not found.
-*/static matcherForNil() {
+*/ static matcherForNil() {
     return {
       target: {
         type: "Class",
@@ -573,7 +706,7 @@ is required, please implement it similar to @c grey_closeTo.
   /*Matcher for asserting that the element exists in the UI hierarchy (i.e. not @c nil).
 
 @return A matcher to check if a specified element is not @c nil.
-*/static matcherForNotNil() {
+*/ static matcherForNotNil() {
     return {
       target: {
         type: "Class",
@@ -587,7 +720,7 @@ is required, please implement it similar to @c grey_closeTo.
   /*A Matcher that matches against any object, including @c nils.
 
 @return A matcher that matches any object.
-*/static matcherForAnything() {
+*/ static matcherForAnything() {
     return {
       target: {
         type: "Class",
@@ -603,18 +736,25 @@ is required, please implement it similar to @c grey_closeTo.
 @param edge The content edge UIScrollView should be scrolled to.
 
 @return A matcher that matches a UIScrollView scrolled to content @c edge.
-*/static matcherForScrolledToContentEdge(edge) {
-    if (!["left", "right", "top", "bottom"].some(option => option === edge)) throw new Error("edge should be one of [left, right, top, bottom], but got " + edge);
+*/ static matcherForScrolledToContentEdge(
+    edge
+  ) {
+    if (!["left", "right", "top", "bottom"].some(option => option === edge))
+      throw new Error(
+        "edge should be one of [left, right, top, bottom], but got " + edge
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForScrolledToContentEdge:",
-      args: [{
-        type: "NSInteger",
-        value: sanitize_greyContentEdge(edge)
-      }]
+      args: [
+        {
+          type: "NSInteger",
+          value: sanitize_greyContentEdge(edge)
+        }
+      ]
     };
   }
 
@@ -623,21 +763,28 @@ is required, please implement it similar to @c grey_closeTo.
 @param value The text string contained inside the UITextField.
 
 @return A matcher that matches the value inside a UITextField.
-*/static matcherForTextFieldValue(value) {
-    if (typeof value !== "string") throw new Error("value should be a string, but got " + (value + (" (" + (typeof value + ")"))));
+*/ static matcherForTextFieldValue(
+    value
+  ) {
+    if (typeof value !== "string")
+      throw new Error(
+        "value should be a string, but got " +
+          (value + (" (" + (typeof value + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "matcherForTextFieldValue:",
-      args: [{
-        type: "NSString",
-        value: value
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: value
+        }
+      ]
     };
   }
-
 }
 
 module.exports = GREYMatchers;

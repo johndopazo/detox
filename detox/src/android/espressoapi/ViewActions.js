@@ -4,8 +4,6 @@
 	For more information see generation/README.md.
 */
 
-
-
 class ViewActions {
   static clearGlobalAssertions() {
     return {
@@ -129,17 +127,23 @@ class ViewActions {
   }
 
   static pressKey(keyCode) {
-    if (typeof keyCode !== "number") throw new Error("keyCode should be a number, but got " + (keyCode + (" (" + (typeof keyCode + ")"))));
+    if (typeof keyCode !== "number")
+      throw new Error(
+        "keyCode should be a number, but got " +
+          (keyCode + (" (" + (typeof keyCode + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "android.support.test.espresso.action.ViewActions"
       },
       method: "pressKey",
-      args: [{
-        type: "Integer",
-        value: keyCode
-      }]
+      args: [
+        {
+          type: "Integer",
+          value: keyCode
+        }
+      ]
     };
   }
 
@@ -177,7 +181,11 @@ class ViewActions {
   }
 
   static typeTextIntoFocusedView(stringToBeTyped) {
-    if (typeof stringToBeTyped !== "string") throw new Error("stringToBeTyped should be a string, but got " + (stringToBeTyped + (" (" + (typeof stringToBeTyped + ")"))));
+    if (typeof stringToBeTyped !== "string")
+      throw new Error(
+        "stringToBeTyped should be a string, but got " +
+          (stringToBeTyped + (" (" + (typeof stringToBeTyped + ")")))
+      );
     return {
       target: {
         type: "Class",
@@ -189,7 +197,11 @@ class ViewActions {
   }
 
   static typeText(stringToBeTyped) {
-    if (typeof stringToBeTyped !== "string") throw new Error("stringToBeTyped should be a string, but got " + (stringToBeTyped + (" (" + (typeof stringToBeTyped + ")"))));
+    if (typeof stringToBeTyped !== "string")
+      throw new Error(
+        "stringToBeTyped should be a string, but got " +
+          (stringToBeTyped + (" (" + (typeof stringToBeTyped + ")")))
+      );
     return {
       target: {
         type: "Class",
@@ -201,7 +213,11 @@ class ViewActions {
   }
 
   static replaceText(stringToBeSet) {
-    if (typeof stringToBeSet !== "string") throw new Error("stringToBeSet should be a string, but got " + (stringToBeSet + (" (" + (typeof stringToBeSet + ")"))));
+    if (typeof stringToBeSet !== "string")
+      throw new Error(
+        "stringToBeSet should be a string, but got " +
+          (stringToBeSet + (" (" + (typeof stringToBeSet + ")")))
+      );
     return {
       target: {
         type: "Class",
@@ -213,7 +229,11 @@ class ViewActions {
   }
 
   static openLinkWithText(linkText) {
-    if (typeof linkText !== "string") throw new Error("linkText should be a string, but got " + (linkText + (" (" + (typeof linkText + ")"))));
+    if (typeof linkText !== "string")
+      throw new Error(
+        "linkText should be a string, but got " +
+          (linkText + (" (" + (typeof linkText + ")")))
+      );
     return {
       target: {
         type: "Class",
@@ -225,7 +245,10 @@ class ViewActions {
   }
 
   static openLinkWithUri(uri) {
-    if (typeof uri !== "string") throw new Error("uri should be a string, but got " + (uri + (" (" + (typeof uri + ")"))));
+    if (typeof uri !== "string")
+      throw new Error(
+        "uri should be a string, but got " + (uri + (" (" + (typeof uri + ")")))
+      );
     return {
       target: {
         type: "Class",
@@ -235,7 +258,6 @@ class ViewActions {
       args: [uri]
     };
   }
-
 }
 
 module.exports = ViewActions;

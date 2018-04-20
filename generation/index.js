@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+const prettier = require("prettier");
+const fs = require("fs");
+
 const generateIOSAdapters = require("./adapters/ios");
 const iosFiles = {
 	"../detox/ios/EarlGrey/EarlGrey/Action/GREYActions.h":
@@ -40,3 +43,14 @@ const androidFiles = {
 		"../detox/src/android/espressoapi/DetoxMatcher.js"
 };
 generateAndroidAdapters(androidFiles);
+
+
+// Run prettier over the generated files
+const allFiles = [...Object.values(iosFiles), ...Object.values(androidFiles)];
+
+allFiles.forEach(file => {
+    const text = fs.readFileSync(file, "utf8");
+    const formatted = prettier.format(text);
+    fs.writeFileSync(file, formatted);
+});
+

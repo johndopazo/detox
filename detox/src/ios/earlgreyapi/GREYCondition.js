@@ -4,8 +4,6 @@
 	For more information see generation/README.md.
 */
 
-
-
 class GREYCondition {
   /*Waits for the condition to be met until the specified @c seconds have elapsed.
 
@@ -19,18 +17,27 @@ GREYCondition::waitWithTimeout:pollInterval:
 @param seconds Amount of time to wait for the condition to be met, in seconds.
 
 @return @c YES if the condition was met before the timeout, @c NO otherwise.
-*/static waitWithTimeout(element, seconds) {
-    if (typeof seconds !== "number") throw new Error("seconds should be a number, but got " + (seconds + (" (" + (typeof seconds + ")"))));
+*/ static waitWithTimeout(
+    element,
+    seconds
+  ) {
+    if (typeof seconds !== "number")
+      throw new Error(
+        "seconds should be a number, but got " +
+          (seconds + (" (" + (typeof seconds + ")")))
+      );
     return {
       target: {
         type: "Invocation",
         value: element
       },
       method: "waitWithTimeout:",
-      args: [{
-        type: "CGFloat",
-        value: seconds
-      }]
+      args: [
+        {
+          type: "CGFloat",
+          value: seconds
+        }
+      ]
     };
   }
 
@@ -44,25 +51,39 @@ the condition as close as possible to every @c interval seconds.
 @param interval The minimum time that should elapse between checking the condition.
 
 @return @c YES if the condition was met before the timeout, @c NO otherwise.
-*/static waitWithTimeoutPollInterval(element, seconds, interval) {
-    if (typeof seconds !== "number") throw new Error("seconds should be a number, but got " + (seconds + (" (" + (typeof seconds + ")"))));
-    if (typeof interval !== "number") throw new Error("interval should be a number, but got " + (interval + (" (" + (typeof interval + ")"))));
+*/ static waitWithTimeoutPollInterval(
+    element,
+    seconds,
+    interval
+  ) {
+    if (typeof seconds !== "number")
+      throw new Error(
+        "seconds should be a number, but got " +
+          (seconds + (" (" + (typeof seconds + ")")))
+      );
+    if (typeof interval !== "number")
+      throw new Error(
+        "interval should be a number, but got " +
+          (interval + (" (" + (typeof interval + ")")))
+      );
     return {
       target: {
         type: "Invocation",
         value: element
       },
       method: "waitWithTimeout:pollInterval:",
-      args: [{
-        type: "CGFloat",
-        value: seconds
-      }, {
-        type: "CGFloat",
-        value: interval
-      }]
+      args: [
+        {
+          type: "CGFloat",
+          value: seconds
+        },
+        {
+          type: "CGFloat",
+          value: interval
+        }
+      ]
     };
   }
-
 }
 
 module.exports = GREYCondition;

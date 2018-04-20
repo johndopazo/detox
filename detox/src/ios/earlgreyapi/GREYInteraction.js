@@ -4,8 +4,6 @@
 	For more information see generation/README.md.
 */
 
-
-
 class GREYInteraction {
   /*Indicates that the current interaction should be performed on a UI element contained inside
 another UI element that is uniquely matched by @c rootMatcher.
@@ -14,9 +12,21 @@ another UI element that is uniquely matched by @c rootMatcher.
 will be performed on.
 
 @return The provided GREYInteraction instance, with an appropriate rootMatcher.
-*/static inRoot(element, rootMatcher) {
-    if (typeof rootMatcher !== "object" || rootMatcher.type !== "Invocation" || typeof rootMatcher.value !== "object" || typeof rootMatcher.value.target !== "object" || rootMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('rootMatcher should be a GREYMatcher, but got ' + JSON.stringify(rootMatcher));
+*/ static inRoot(
+    element,
+    rootMatcher
+  ) {
+    if (
+      typeof rootMatcher !== "object" ||
+      rootMatcher.type !== "Invocation" ||
+      typeof rootMatcher.value !== "object" ||
+      typeof rootMatcher.value.target !== "object" ||
+      rootMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "rootMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(rootMatcher)
+      );
     }
 
     return {
@@ -50,13 +60,33 @@ performAction:grey_tap()] // This should be separately called for the action.
 @param matcher The matcher that the element matches.
 
 @return The provided GREYInteraction instance, with an appropriate action and matcher.
-*/static usingSearchActionOnElementWithMatcher(element, action, matcher) {
-    if (typeof action !== "object" || action.type !== "Invocation" || typeof action.value !== "object" || typeof action.value.target !== "object" || action.value.target.value !== "GREYActions") {
-      throw new Error('action should be a GREYAction, but got ' + JSON.stringify(action));
+*/ static usingSearchActionOnElementWithMatcher(
+    element,
+    action,
+    matcher
+  ) {
+    if (
+      typeof action !== "object" ||
+      action.type !== "Invocation" ||
+      typeof action.value !== "object" ||
+      typeof action.value.target !== "object" ||
+      action.value.target.value !== "GREYActions"
+    ) {
+      throw new Error(
+        "action should be a GREYAction, but got " + JSON.stringify(action)
+      );
     }
 
-    if (typeof matcher !== "object" || matcher.type !== "Invocation" || typeof matcher.value !== "object" || typeof matcher.value.target !== "object" || matcher.value.target.value !== "GREYMatchers") {
-      throw new Error('matcher should be a GREYMatcher, but got ' + JSON.stringify(matcher));
+    if (
+      typeof matcher !== "object" ||
+      matcher.type !== "Invocation" ||
+      typeof matcher.value !== "object" ||
+      typeof matcher.value.target !== "object" ||
+      matcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "matcher should be a GREYMatcher, but got " + JSON.stringify(matcher)
+      );
     }
 
     return {
@@ -75,9 +105,20 @@ performAction:grey_tap()] // This should be separately called for the action.
 @throws NSException if the action fails.
 
 @return The provided GREYInteraction instance with an appropriate action.
-*/static performAction(element, action) {
-    if (typeof action !== "object" || action.type !== "Invocation" || typeof action.value !== "object" || typeof action.value.target !== "object" || action.value.target.value !== "GREYActions") {
-      throw new Error('action should be a GREYAction, but got ' + JSON.stringify(action));
+*/ static performAction(
+    element,
+    action
+  ) {
+    if (
+      typeof action !== "object" ||
+      action.type !== "Invocation" ||
+      typeof action.value !== "object" ||
+      typeof action.value.target !== "object" ||
+      action.value.target.value !== "GREYActions"
+    ) {
+      throw new Error(
+        "action should be a GREYAction, but got " + JSON.stringify(action)
+      );
     }
 
     return {
@@ -95,9 +136,20 @@ performAction:grey_tap()] // This should be separately called for the action.
 @param matcher The matcher to be evaluated on the @c element.
 
 @return The provided GREYInteraction instance with a matcher to be evaluated on an element.
-*/static assertWithMatcher(element, matcher) {
-    if (typeof matcher !== "object" || matcher.type !== "Invocation" || typeof matcher.value !== "object" || typeof matcher.value.target !== "object" || matcher.value.target.value !== "GREYMatchers") {
-      throw new Error('matcher should be a GREYMatcher, but got ' + JSON.stringify(matcher));
+*/ static assertWithMatcher(
+    element,
+    matcher
+  ) {
+    if (
+      typeof matcher !== "object" ||
+      matcher.type !== "Invocation" ||
+      typeof matcher.value !== "object" ||
+      typeof matcher.value.target !== "object" ||
+      matcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "matcher should be a GREYMatcher, but got " + JSON.stringify(matcher)
+      );
     }
 
     return {
@@ -126,21 +178,29 @@ to be selected.
 
 @return An interaction (assertion or an action) to be performed on the element at the
 specified index in the list of matched elements.
-*/static atIndex(element, index) {
-    if (typeof index !== "number") throw new Error("index should be a number, but got " + (index + (" (" + (typeof index + ")"))));
+*/ static atIndex(
+    element,
+    index
+  ) {
+    if (typeof index !== "number")
+      throw new Error(
+        "index should be a number, but got " +
+          (index + (" (" + (typeof index + ")")))
+      );
     return {
       target: {
         type: "Invocation",
         value: element
       },
       method: "atIndex:",
-      args: [{
-        type: "NSInteger",
-        value: index
-      }]
+      args: [
+        {
+          type: "NSInteger",
+          value: index
+        }
+      ]
     };
   }
-
 }
 
 module.exports = GREYInteraction;

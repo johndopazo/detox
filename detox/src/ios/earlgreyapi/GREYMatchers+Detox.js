@@ -4,42 +4,60 @@
 	For more information see generation/README.md.
 */
 
-
-
 class GREYMatchers {
   static detoxMatcherForText(text) {
-    if (typeof text !== "string") throw new Error("text should be a string, but got " + (text + (" (" + (typeof text + ")"))));
+    if (typeof text !== "string")
+      throw new Error(
+        "text should be a string, but got " +
+          (text + (" (" + (typeof text + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "detoxMatcherForText:",
-      args: [{
-        type: "NSString",
-        value: text
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: text
+        }
+      ]
     };
   }
 
   static detox_matcherForAccessibilityLabel(label) {
-    if (typeof label !== "string") throw new Error("label should be a string, but got " + (label + (" (" + (typeof label + ")"))));
+    if (typeof label !== "string")
+      throw new Error(
+        "label should be a string, but got " +
+          (label + (" (" + (typeof label + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "detox_matcherForAccessibilityLabel:",
-      args: [{
-        type: "NSString",
-        value: label
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: label
+        }
+      ]
     };
   }
 
   static detoxMatcherForScrollChildOfMatcher(matcher) {
-    if (typeof matcher !== "object" || matcher.type !== "Invocation" || typeof matcher.value !== "object" || typeof matcher.value.target !== "object" || matcher.value.target.value !== "GREYMatchers") {
-      throw new Error('matcher should be a GREYMatcher, but got ' + JSON.stringify(matcher));
+    if (
+      typeof matcher !== "object" ||
+      matcher.type !== "Invocation" ||
+      typeof matcher.value !== "object" ||
+      typeof matcher.value.target !== "object" ||
+      matcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "matcher should be a GREYMatcher, but got " + JSON.stringify(matcher)
+      );
     }
 
     return {
@@ -53,8 +71,16 @@ class GREYMatchers {
   }
 
   static detoxMatcherAvoidingProblematicReactNativeElements(matcher) {
-    if (typeof matcher !== "object" || matcher.type !== "Invocation" || typeof matcher.value !== "object" || typeof matcher.value.target !== "object" || matcher.value.target.value !== "GREYMatchers") {
-      throw new Error('matcher should be a GREYMatcher, but got ' + JSON.stringify(matcher));
+    if (
+      typeof matcher !== "object" ||
+      matcher.type !== "Invocation" ||
+      typeof matcher.value !== "object" ||
+      typeof matcher.value.target !== "object" ||
+      matcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "matcher should be a GREYMatcher, but got " + JSON.stringify(matcher)
+      );
     }
 
     return {
@@ -68,12 +94,30 @@ class GREYMatchers {
   }
 
   static detoxMatcherForBothAnd(firstMatcher, secondMatcher) {
-    if (typeof firstMatcher !== "object" || firstMatcher.type !== "Invocation" || typeof firstMatcher.value !== "object" || typeof firstMatcher.value.target !== "object" || firstMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('firstMatcher should be a GREYMatcher, but got ' + JSON.stringify(firstMatcher));
+    if (
+      typeof firstMatcher !== "object" ||
+      firstMatcher.type !== "Invocation" ||
+      typeof firstMatcher.value !== "object" ||
+      typeof firstMatcher.value.target !== "object" ||
+      firstMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "firstMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(firstMatcher)
+      );
     }
 
-    if (typeof secondMatcher !== "object" || secondMatcher.type !== "Invocation" || typeof secondMatcher.value !== "object" || typeof secondMatcher.value.target !== "object" || secondMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('secondMatcher should be a GREYMatcher, but got ' + JSON.stringify(secondMatcher));
+    if (
+      typeof secondMatcher !== "object" ||
+      secondMatcher.type !== "Invocation" ||
+      typeof secondMatcher.value !== "object" ||
+      typeof secondMatcher.value.target !== "object" ||
+      secondMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "secondMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(secondMatcher)
+      );
     }
 
     return {
@@ -87,12 +131,30 @@ class GREYMatchers {
   }
 
   static detoxMatcherForBothAndAncestorMatcher(firstMatcher, ancestorMatcher) {
-    if (typeof firstMatcher !== "object" || firstMatcher.type !== "Invocation" || typeof firstMatcher.value !== "object" || typeof firstMatcher.value.target !== "object" || firstMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('firstMatcher should be a GREYMatcher, but got ' + JSON.stringify(firstMatcher));
+    if (
+      typeof firstMatcher !== "object" ||
+      firstMatcher.type !== "Invocation" ||
+      typeof firstMatcher.value !== "object" ||
+      typeof firstMatcher.value.target !== "object" ||
+      firstMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "firstMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(firstMatcher)
+      );
     }
 
-    if (typeof ancestorMatcher !== "object" || ancestorMatcher.type !== "Invocation" || typeof ancestorMatcher.value !== "object" || typeof ancestorMatcher.value.target !== "object" || ancestorMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('ancestorMatcher should be a GREYMatcher, but got ' + JSON.stringify(ancestorMatcher));
+    if (
+      typeof ancestorMatcher !== "object" ||
+      ancestorMatcher.type !== "Invocation" ||
+      typeof ancestorMatcher.value !== "object" ||
+      typeof ancestorMatcher.value.target !== "object" ||
+      ancestorMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "ancestorMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(ancestorMatcher)
+      );
     }
 
     return {
@@ -105,13 +167,34 @@ class GREYMatchers {
     };
   }
 
-  static detoxMatcherForBothAndDescendantMatcher(firstMatcher, descendantMatcher) {
-    if (typeof firstMatcher !== "object" || firstMatcher.type !== "Invocation" || typeof firstMatcher.value !== "object" || typeof firstMatcher.value.target !== "object" || firstMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('firstMatcher should be a GREYMatcher, but got ' + JSON.stringify(firstMatcher));
+  static detoxMatcherForBothAndDescendantMatcher(
+    firstMatcher,
+    descendantMatcher
+  ) {
+    if (
+      typeof firstMatcher !== "object" ||
+      firstMatcher.type !== "Invocation" ||
+      typeof firstMatcher.value !== "object" ||
+      typeof firstMatcher.value.target !== "object" ||
+      firstMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "firstMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(firstMatcher)
+      );
     }
 
-    if (typeof descendantMatcher !== "object" || descendantMatcher.type !== "Invocation" || typeof descendantMatcher.value !== "object" || typeof descendantMatcher.value.target !== "object" || descendantMatcher.value.target.value !== "GREYMatchers") {
-      throw new Error('descendantMatcher should be a GREYMatcher, but got ' + JSON.stringify(descendantMatcher));
+    if (
+      typeof descendantMatcher !== "object" ||
+      descendantMatcher.type !== "Invocation" ||
+      typeof descendantMatcher.value !== "object" ||
+      typeof descendantMatcher.value.target !== "object" ||
+      descendantMatcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "descendantMatcher should be a GREYMatcher, but got " +
+          JSON.stringify(descendantMatcher)
+      );
     }
 
     return {
@@ -125,8 +208,16 @@ class GREYMatchers {
   }
 
   static detoxMatcherForNot(matcher) {
-    if (typeof matcher !== "object" || matcher.type !== "Invocation" || typeof matcher.value !== "object" || typeof matcher.value.target !== "object" || matcher.value.target.value !== "GREYMatchers") {
-      throw new Error('matcher should be a GREYMatcher, but got ' + JSON.stringify(matcher));
+    if (
+      typeof matcher !== "object" ||
+      matcher.type !== "Invocation" ||
+      typeof matcher.value !== "object" ||
+      typeof matcher.value.target !== "object" ||
+      matcher.value.target.value !== "GREYMatchers"
+    ) {
+      throw new Error(
+        "matcher should be a GREYMatcher, but got " + JSON.stringify(matcher)
+      );
     }
 
     return {
@@ -140,20 +231,25 @@ class GREYMatchers {
   }
 
   static detoxMatcherForClass(aClassName) {
-    if (typeof aClassName !== "string") throw new Error("aClassName should be a string, but got " + (aClassName + (" (" + (typeof aClassName + ")"))));
+    if (typeof aClassName !== "string")
+      throw new Error(
+        "aClassName should be a string, but got " +
+          (aClassName + (" (" + (typeof aClassName + ")")))
+      );
     return {
       target: {
         type: "Class",
         value: "GREYMatchers"
       },
       method: "detoxMatcherForClass:",
-      args: [{
-        type: "NSString",
-        value: aClassName
-      }]
+      args: [
+        {
+          type: "NSString",
+          value: aClassName
+        }
+      ]
     };
   }
-
 }
 
 module.exports = GREYMatchers;
